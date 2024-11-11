@@ -1,0 +1,18 @@
+<div>
+  <div class="calendar-grid headers">
+  @for (header of headers; track header) {
+    <div class="grid-cell">
+      {{ header }}
+    </div>
+  }
+  </div>
+  <div class="calendar-grid days">
+  @for (day of days; track day.id) {
+    <div class="grid-cell"
+      [ngStyle]="{'grid-column': day.dayNumber === 1 ?  + dayColumnPosition(day) : '' }"
+      >
+      {{ day.dayNumber }}
+    </div>
+  }
+  </div>
+</div>

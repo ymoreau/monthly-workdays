@@ -1,0 +1,20 @@
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  font-size: larger;
+  border: 1px gray solid;
+}
+
+.headers {
+  background-color: rgb(232, 232, 232);
+  font-weight: 500;
+}
+
+.days {
+  font-weight: 400;
+}
+
+.grid-cell {
+  padding: 0.6em;
+}
