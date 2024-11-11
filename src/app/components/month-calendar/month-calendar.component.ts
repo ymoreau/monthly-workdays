@@ -32,4 +32,8 @@ export class MonthCalendarComponent {
   isDayDisabled(weekDay: WeekDay): boolean {
     return this.disabledDays.includes(weekDay);
   }
+
+  workDaysCount(): number {
+    return this.calendarService.getWorkedDaysCount(this.days);
+  }
 }

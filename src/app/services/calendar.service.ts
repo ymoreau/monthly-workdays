@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Month } from '../models/months.enum';
 import { Day } from '../models/day.model';
 import { WeekDay } from '../models/week-day.enum';
+import { WorkDayStatus } from '../models/work-day-status.enum';
 
 @Injectable({
   providedIn: 'root'
@@ -42,5 +43,22 @@ export class CalendarService {
       pos = 7 + pos; // <=> 7 - abs(pos)
     }
     return pos + 1; // Days start at zero but our position starts at 1
+  }
+
+  /**
+   * Count the total work days based on Day.status of the given array
+   * @returns Total of full days (counting half days as half a full day)
+   */
+  getWorkedDaysCount(days: Day[]): number {
+    let count = 0;
+    for (const day of days) {
+      const status = day.status;
+      if (status === WorkDayStatus.FULL_DAY) {
+        count += 1;
+      } else if (status === WorkDayStatus.HALF_DAY) {
+        count += 0.5;
+      }
+    }
+    return count;
   }
 }

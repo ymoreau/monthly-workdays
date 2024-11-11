@@ -2,7 +2,9 @@ import { TestBed } from '@angular/core/testing';
 
 import { CalendarService } from './calendar.service';
 import { Month } from '../models/months.enum';
+import { Day } from '../models/day.model';
 import { WeekDay } from '../models/week-day.enum';
+import { WorkDayStatus } from '../models/work-day-status.enum';
 
 describe('CalendarService', () => {
   let service: CalendarService;
@@ -42,5 +44,18 @@ describe('CalendarService', () => {
     expect(service.getDayPosition(days[2].weekDay)).toBe(3);
     expect(days[6].weekDay).toBe(WeekDay.SATURDAY);
     expect(service.getDayPosition(days[6].weekDay)).toBe(7);
-  })
+  });
+
+  it('should count the total worked days', () => {
+    const days: Day[] = [];
+    for (let i = 1; i <= 10; i++) {
+      days.push(new Day(2006, Month.JANUARY, i));
+    }
+    days[1].status = WorkDayStatus.FULL_DAY;
+    days[2].status = WorkDayStatus.FULL_DAY;
+    days[8].status = WorkDayStatus.HALF_DAY;
+    days[9].status = WorkDayStatus.FULL_DAY;
+
+    expect(service.getWorkedDaysCount(days)).toBe(3.5);
+  });
 });
