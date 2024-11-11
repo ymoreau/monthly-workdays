@@ -16,5 +16,20 @@
 }
 
 .grid-cell {
+  margin: 1px;
   padding: 0.6em;
+}
+
+.disabled-cell {
+  color: lightgray;
+}
+
+.selected {
+  background-color: mediumblue;
+  color: white;
+}
+
+.half-selected {
+  background-color: rgb(51, 71, 255);
+  color: white;
 }

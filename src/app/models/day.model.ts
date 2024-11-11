@@ -1,5 +1,6 @@
 import { Month } from './months.enum';
 import { WeekDay } from './week-day.enum';
+import { WorkDayStatus } from './work-day-status.enum';
 
 /**
  * Model for a day, it does not verify of the date consistency.
@@ -8,6 +9,8 @@ import { WeekDay } from './week-day.enum';
 export class Day {
   public readonly id: string;
   public readonly weekDay: WeekDay;
+
+  public status = WorkDayStatus.UNSELECTED;
 
   constructor(
     public readonly year: number,

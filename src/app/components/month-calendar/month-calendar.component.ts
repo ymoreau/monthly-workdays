@@ -2,6 +2,7 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Day } from '../../models/day.model';
 import { WeekDay } from '../../models/week-day.enum';
+import { WorkDayStatus } from '../../models/work-day-status.enum';
 import { CalendarService } from '../../services/calendar.service';
 
 @Component({
@@ -14,6 +15,9 @@ import { CalendarService } from '../../services/calendar.service';
 export class MonthCalendarComponent {
   days: Day[] = [];
   headers = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+  disabledDays = [WeekDay.SATURDAY, WeekDay.SUNDAY];
+
+  readonly WorkDayStatus = WorkDayStatus; // Alias for HTML template
 
   private readonly calendarService = inject(CalendarService);
 
@@ -23,5 +27,9 @@ export class MonthCalendarComponent {
 
   dayColumnPosition(day: Day): number {
     return this.calendarService.getDayPosition(day.weekDay);
+  }
+
+  isDayDisabled(weekDay: WeekDay): boolean {
+    return this.disabledDays.includes(weekDay);
   }
 }
