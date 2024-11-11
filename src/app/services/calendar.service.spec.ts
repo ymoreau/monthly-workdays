@@ -1,8 +1,8 @@
 import { TestBed } from '@angular/core/testing';
 
 import { CalendarService } from './calendar.service';
-import { Month } from '../models/months';
-import { WeekDay } from '../models/week-day';
+import { Month } from '../models/months.enum';
+import { WeekDay } from '../models/week-day.enum';
 
 describe('CalendarService', () => {
   let service: CalendarService;

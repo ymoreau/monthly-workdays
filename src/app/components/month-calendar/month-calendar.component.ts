@@ -1,6 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Day } from '../../models/day.model';
+import { WeekDay } from '../../models/week-day.enum';
 import { CalendarService } from '../../services/calendar.service';
 
 @Component({

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { Month } from '../models/months';
+import { Month } from '../models/months.enum';
 import { Day } from '../models/day.model';
-import { WeekDay } from '../models/week-day';
+import { WeekDay } from '../models/week-day.enum';
 
 @Injectable({
   providedIn: 'root'

@@ -1,5 +1,5 @@
-import { Month } from './months';
-import { WeekDay } from './week-day';
+import { Month } from './months.enum';
+import { WeekDay } from './week-day.enum';
 
 /**
  * Model for a day, it does not verify of the date consistency.

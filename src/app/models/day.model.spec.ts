@@ -1,6 +1,6 @@
 import { Day } from './day.model';
-import { Month } from './months';
-import { WeekDay } from './week-day';
+import { Month } from './months.enum';
+import { WeekDay } from './week-day.enum';
 
 describe('Day', () => {
   let day: Day;
