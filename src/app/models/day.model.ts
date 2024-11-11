@@ -21,4 +21,10 @@ export class Day {
     this.weekDay = (new Date(year, month, dayNumber).getDay()) as WeekDay;
   }
 
+  toggleStatus(): void {
+    this.status++;
+    if (this.status > WorkDayStatus.HALF_DAY) {
+      this.status = WorkDayStatus.UNSELECTED;
+    }
+  }
 }

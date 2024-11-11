@@ -20,8 +20,13 @@
   padding: 0.6em;
 }
 
+.selectable {
+  cursor: pointer;
+}
+
 .disabled-cell {
   color: lightgray;
+  cursor: auto;
 }
 
 .selected {

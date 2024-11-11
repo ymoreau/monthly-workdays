@@ -8,14 +8,27 @@
   </div>
   <div class="calendar-grid days">
   @for (day of days; track day.id) {
-    <div class="grid-cell"
-      [ngClass]="{'disabled-cell': isDayDisabled(day.weekDay),
-                  'selected': day.status === WorkDayStatus.FULL_DAY,
-                  'half-selected': day.status === WorkDayStatus.HALF_DAY}"
-      [ngStyle]="{'grid-column': day.dayNumber === 1 ?  + dayColumnPosition(day) : '' }"
-      >
-      {{ day.dayNumber }}
-    </div>
+    @if (isDayDisabled(day.weekDay)) {
+      <div
+        class="grid-cell disabled-cell"
+        [ngStyle]="{'grid-column': day.dayNumber === 1 ?  + dayColumnPosition(day) : '' }"
+        >
+        {{ day.dayNumber }}
+      </div>
+    } @else {
+      <div
+        role="button"
+        tabindex="day.dayNumber"
+        (click)="day.toggleStatus()"
+        (keyup.enter)="day.toggleStatus()"
+        class="grid-cell selectable"
+        [ngClass]="{'selected': day.status === WorkDayStatus.FULL_DAY,
+                    'half-selected': day.status === WorkDayStatus.HALF_DAY}"
+        [ngStyle]="{'grid-column': day.dayNumber === 1 ?  + dayColumnPosition(day) : '' }"
+        >
+        {{ day.dayNumber }}
+      </div>
+    }
   }
   </div>
 </div>
