@@ -7,7 +7,7 @@ describe('Day', () => {
   let day: Day;
 
   it('should build a correct day 1', () => {
-    day = new Day(2001, Month.JANUARY, 1);
+    day = new Day(new Date(2001, Month.JANUARY, 1));
 
     expect(day.year).toBe(2001);
     expect(day.month).toBe(Month.JANUARY);
@@ -17,7 +17,7 @@ describe('Day', () => {
   });
 
   it('should build a correct day 2', () => {
-    day = new Day(2001, Month.JULY, 21);
+    day = new Day(new Date(2001, Month.JULY, 21));
 
     expect(day.year).toBe(2001);
     expect(day.month).toBe(Month.JULY);
@@ -27,7 +27,7 @@ describe('Day', () => {
   });
 
   it('should toggle the status', () => {
-    day = new Day(2001, Month.JULY, 21);
+    day = new Day(new Date(2001, Month.JULY, 21));
 
     expect(day.status).toBe(WorkDayStatus.UNSELECTED);
     day.toggleStatus();

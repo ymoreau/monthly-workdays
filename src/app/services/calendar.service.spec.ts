@@ -49,7 +49,7 @@ describe('CalendarService', () => {
   it('should count the total worked days', () => {
     const days: Day[] = [];
     for (let i = 1; i <= 10; i++) {
-      days.push(new Day(2006, Month.JANUARY, i));
+      days.push(new Day(new Date(2006, Month.JANUARY, i)));
     }
     days[1].status = WorkDayStatus.FULL_DAY;
     days[2].status = WorkDayStatus.FULL_DAY;

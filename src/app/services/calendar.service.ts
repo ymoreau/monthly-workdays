@@ -26,7 +26,7 @@ export class CalendarService {
 
     const monthDaysCount = new Date(year, month + 1, 0).getDate();
     for (let i = 1; i <= monthDaysCount; i++) {
-      days.push(new Day(year, month, i));
+      days.push(new Day(new Date(year, month, i)));
     }
 
     return days;
