@@ -18,8 +18,12 @@ describe('CalendarService', () => {
     expect(service).toBeTruthy();
   });
 
+  it('should create a correct month id', () => {
+    expect(service['makeMonthId'](2006, Month.JANUARY)).toEqual('2006-01');
+  });
+
   it('should create a correct month', () => {
-    const days = service.monthDays(2006, Month.JANUARY);
+    const days = service['generateMonthDays'](2006, Month.JANUARY);
 
     expect(days.length).toBe(31);
     expect(days[0].year).toBe(2006);
@@ -31,9 +35,29 @@ describe('CalendarService', () => {
     expect(days[30].weekDay).toBe(WeekDay.TUESDAY);
   });
 
+  it('should create and retrieve a month', () => {
+    const days = service['getMonthDays'](2006, Month.JANUARY);
+
+    expect(days.length).toBe(31);
+    expect(days[0].year).toBe(2006);
+    expect(days[0].month).toBe(Month.JANUARY);
+    expect(days[0].dayNumber).toBe(1);
+    expect(days[0].weekDay).toBe(WeekDay.SUNDAY);
+    expect(days[0].id).toBe('2006-01-01');
+    expect(days[30].dayNumber).toBe(31);
+    expect(days[30].weekDay).toBe(WeekDay.TUESDAY);
+  });
+
+  it('should create a month only once', () => {
+    const days1 = service['getMonthDays'](2006, Month.JANUARY);
+    const days2 = service['getMonthDays'](2006, Month.JANUARY);
+
+    expect(days1).toBe(days2);
+  });
+
   it('should give correct day position for a week starting on Sunday', () => {
     service.firstDayOfTheWeek = WeekDay.SUNDAY;
-    const days = service.monthDays(2006, Month.JANUARY);
+    const days = service['generateMonthDays'](2006, Month.JANUARY);
 
     expect(days.length).toBe(31);
     expect(days[0].weekDay).toBe(WeekDay.SUNDAY);
@@ -57,5 +81,29 @@ describe('CalendarService', () => {
     days[9].status = WorkDayStatus.FULL_DAY;
 
     expect(service.getWorkedDaysCount(days)).toBe(3.5);
+  });
+
+  it('should create a correct next month', () => {
+    service['_currentDate'] = new Date(2006, Month.JANUARY, 1);
+    const days = service.setToNextMonth();
+
+    expect(days.length).toBe(28);
+    expect(days[0].year).toBe(2006);
+    expect(days[0].month).toBe(Month.FEBRUARY);
+    expect(days[0].dayNumber).toBe(1);
+    expect(days[0].weekDay).toBe(WeekDay.WEDNESDAY);
+    expect(days[0].id).toBe('2006-02-01');
+  });
+
+  it('should create a correct previous month', () => {
+    service['_currentDate'] = new Date(2006, Month.JANUARY, 1);
+    const days = service.setToPreviousMonth();
+
+    expect(days.length).toBe(31);
+    expect(days[0].year).toBe(2005);
+    expect(days[0].month).toBe(Month.DECEMBER);
+    expect(days[0].dayNumber).toBe(1);
+    expect(days[0].weekDay).toBe(WeekDay.THURSDAY);
+    expect(days[0].id).toBe('2005-12-01');
   });
 });

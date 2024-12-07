@@ -10,26 +10,43 @@ import { WorkDayStatus } from '../models/work-day-status.enum';
 export class CalendarService {
   public firstDayOfTheWeek = WeekDay.MONDAY;
 
-  /**
-   * @returns ordered array of the days of the current month
-   */
-  currentMonthDays(): Day[] {
-    const date = new Date();
-    return this.monthDays(date.getFullYear(), date.getMonth() as Month);
+  private _currentDate: Date;
+  private _monthMap = new Map<string, Day[]>();
+
+  constructor() {
+    this._currentDate = new Date();
   }
 
   /**
-   * @returns ordered array of the days of the given year and month
+   * @returns the first day of the current month to display
    */
-  monthDays(year: number, month: Month): Day[] {
-    const days: Day[] = [];
+  public currentDate(): Date {
+    return this._currentDate;
+  }
 
-    const monthDaysCount = new Date(year, month + 1, 0).getDate();
-    for (let i = 1; i <= monthDaysCount; i++) {
-      days.push(new Day(new Date(year, month, i)));
-    }
+  /**
+   * @returns ordered array of the days of the current displayed month
+   */
+  public currentMonthDays(): Day[] {
+    return this.getMonthDays(this._currentDate.getFullYear(), this._currentDate.getMonth());
+  }
 
-    return days;
+  /**
+   * Set the previous month as the current displayed month
+   * @returns ordered array of the days of the new current displayed month
+   */
+  public setToPreviousMonth(): Day[] {
+    this._currentDate = new Date(this._currentDate.getFullYear(), this._currentDate.getMonth() - 1);
+    return this.currentMonthDays();
+  }
+
+  /**
+   * Set the next month as the current displayed month
+   * @returns ordered array of the days of the new current displayed month
+   */
+  public setToNextMonth(): Day[] {
+    this._currentDate = new Date(this._currentDate.getFullYear(), this._currentDate.getMonth() + 1);
+    return this.currentMonthDays();
   }
 
   /**
@@ -37,7 +54,7 @@ export class CalendarService {
    * CalendarService.firstDayOfTheWeek being position 1.
    * @returns Position [1-7] relative to CalendarService.firstDayOfTheWeek
    */
-  getDayPosition(weekDay: WeekDay): number {
+  public getDayPosition(weekDay: WeekDay): number {
     let pos = weekDay - this.firstDayOfTheWeek;
     if (pos < 0) { // Negative pos means reverse pos from end of the week
       pos = 7 + pos; // <=> 7 - abs(pos)
@@ -49,7 +66,7 @@ export class CalendarService {
    * Count the total work days based on Day.status of the given array
    * @returns Total of full days (counting half days as half a full day)
    */
-  getWorkedDaysCount(days: Day[]): number {
+  public getWorkedDaysCount(days: Day[]): number {
     let count = 0;
     for (const day of days) {
       const status = day.status;
@@ -60,5 +77,41 @@ export class CalendarService {
       }
     }
     return count;
+  }
+
+  private makeMonthId(year: number, month: Month): string {
+    return year.toString() + '-' + String(month +1 ).padStart(2, '0');
+  }
+
+  /**
+   * Generates and returns an ordered array of the days of the given year and month
+   */
+  private generateMonthDays(year: number, month: Month): Day[] {
+    const days: Day[] = [];
+
+    const monthDaysCount = new Date(year, month + 1, 0).getDate();
+    for (let i = 1; i <= monthDaysCount; i++) {
+      days.push(new Day(new Date(year, month, i)));
+    }
+
+    return days;
+  }
+
+  /**
+   * Retrieves or create if necessary the array of days
+   * @returns ordered array of the days for the given month
+   */
+  private getMonthDays(year: number, month: Month): Day[] {
+    const monthId = this.makeMonthId(year, month);
+
+    if (!this._monthMap.has(monthId)) {
+      this._monthMap.set(monthId, this.generateMonthDays(year, month));
+    }
+
+    let days = this._monthMap.get(monthId);
+    if (!days) {
+      days = [];
+    }
+    return days;
   }
 }
