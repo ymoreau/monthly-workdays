@@ -1,3 +1,9 @@
+.header {
+  text-align: center;
+  font-size: larger;
+  margin-bottom: 5px;
+}
+
 .workeddays-count {
   margin-top: 10px;
   width: 100%;
@@ -12,7 +18,7 @@
   border: 1px gray solid;
 }
 
-.headers {
+.week-headers {
   background-color: rgb(232, 232, 232);
   font-weight: 500;
 }
@@ -36,11 +42,15 @@
 }
 
 .selected {
-  background-color: mediumblue;
-  color: white;
+  background-color: #1a7eea;
+  // color: white;
 }
 
 .half-selected {
-  background-color: rgb(51, 71, 255);
-  color: white;
+  background: linear-gradient(
+        to right bottom,
+        #1a7eea 50%,
+        transparent 50%) no-repeat;
+  // background-color: rgb(68, 103, 233);
+  // color: white;
 }
