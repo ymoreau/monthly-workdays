@@ -15,7 +15,7 @@
   @for (day of days; track day.id) {
     @if (isDayDisabled(day.weekDay)) {
       <div
-        class="grid-cell disabled-cell"
+        class="grid-cell day-cell disabled-cell"
         [ngStyle]="{'grid-column': day.dayNumber === 1 ?  + dayColumnPosition(day) : '' }"
         >
         {{ day.dayNumber }}
@@ -26,7 +26,7 @@
         tabindex="day.dayNumber"
         (click)="day.toggleStatus()"
         (keyup.enter)="day.toggleStatus()"
-        class="grid-cell selectable"
+        class="grid-cell day-cell selectable"
         [ngClass]="{'selected': day.status === WorkDayStatus.FULL_DAY,
                     'half-selected': day.status === WorkDayStatus.HALF_DAY}"
         [ngStyle]="{'grid-column': day.dayNumber === 1 ?  + dayColumnPosition(day) : '' }"
