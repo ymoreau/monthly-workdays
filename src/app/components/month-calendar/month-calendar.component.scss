@@ -28,7 +28,6 @@ button {
 .calendar-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  text-align: center;
   font-size: larger;
   user-select: none;
 }
@@ -43,7 +42,9 @@ button {
 }
 
 .grid-cell {
-  padding: 1.21em 0.6em;
+  aspect-ratio: 1;
+  text-align: center;
+  align-content: center;
 }
 
 .day-cell {
