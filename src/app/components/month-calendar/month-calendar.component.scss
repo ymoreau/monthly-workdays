@@ -28,7 +28,7 @@ button {
 .calendar-grid {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  font-size: larger;
+  font-size: large;
   user-select: none;
 }
 
@@ -51,6 +51,7 @@ button {
   border: 1px lightgray solid;
   margin-top: -1px;
   margin-left: -1px;
+  position: relative; // For the background
 }
 
 .selectable {
@@ -62,13 +63,32 @@ button {
   cursor: auto;
 }
 
+.cell-content {
+  z-index: 10;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  text-align: center;
+  align-content: center;
+}
+
+.cell-background {
+  z-index: 1;
+  position: absolute;
+  width: 70%;
+  height: 70%;
+  top: 15%;
+  left: 15%;
+}
+
 .selected {
-  background-color: #8bbbff;
+  border-radius: 50%;
+  background: conic-gradient(#8bbbff 0%, #8bbbff 100%);
 }
 
 .half-selected {
-  background: linear-gradient(
-        to right bottom,
-        #8bbbff 50%,
-        transparent 50%) no-repeat;
+  border-radius: 50%;
+  background: conic-gradient(transparent 50%, #8bbbff 50%);
 }

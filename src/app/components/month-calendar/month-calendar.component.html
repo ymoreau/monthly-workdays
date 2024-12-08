@@ -29,11 +29,17 @@
         (click)="day.toggleStatus()"
         (keyup.enter)="day.toggleStatus()"
         class="grid-cell day-cell selectable"
-        [ngClass]="{'selected': day.status === WorkDayStatus.FULL_DAY,
-                    'half-selected': day.status === WorkDayStatus.HALF_DAY}"
         [ngStyle]="{'grid-column': day.dayNumber === 1 ?  + dayColumnPosition(day) : '' }"
         >
-        {{ day.dayNumber }}
+          <div class="cell-content">
+            {{ day.dayNumber }}
+          </div>
+          <div
+            class="cell-background"
+            [ngClass]="{'selected': day.status === WorkDayStatus.FULL_DAY,
+                        'half-selected': day.status === WorkDayStatus.HALF_DAY}"
+            >
+          </div>
       </div>
     }
   }
