@@ -1,8 +1,10 @@
 <div>
   <div class="header">
-    <button (click)="this.goToPreviousMonth()" class="float-left">&#10094;</button>
-    <span>{{ currentMonthLabel }}</span>
-    <button (click)="this.goToNextMonth()" class="float-right">&#10095;</button>
+    <div class="month-label">{{ currentMonthLabel }}</div>
+    <div>
+      <button (click)="this.goToPreviousMonth()">&#10094;</button>
+      <button (click)="this.goToNextMonth()">&#10095;</button>
+    </div>
   </div>
   <div class="calendar-grid week-headers">
   @for (header of headers; track header) {

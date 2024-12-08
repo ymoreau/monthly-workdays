@@ -1,5 +1,8 @@
 .header {
-  text-align: center;
+  display: inline-flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
   font-size: larger;
   font-weight: 600;
   margin-bottom: 5px;
@@ -9,6 +12,17 @@
   margin-top: 10px;
   width: 100%;
   text-align: right;
+}
+
+.month-label {
+  font-size: xx-large;
+}
+
+button {
+  margin-left: 5px;
+  height: 2em;
+  width: 2em;
+  font-size: x-large;
 }
 
 .calendar-grid {
