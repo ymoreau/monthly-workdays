@@ -1,6 +1,8 @@
-@import url("https://fonts.googleapis.com/css?family=Montserrat:400,600");
+@import "style-colors";
+
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,500,600");
 body {
   font-family: 'Montserrat';
-  font-weight: 400;
-  font-size: larger;
+  font-weight: 500;
+  color: $color-primary;
 }

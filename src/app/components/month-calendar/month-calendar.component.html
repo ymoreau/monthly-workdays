@@ -2,18 +2,18 @@
   <div class="header">
     <div class="month-label">{{ currentMonthLabel }}</div>
     <div>
-      <button (click)="this.goToPreviousMonth()">&#10094;</button>
-      <button (click)="this.goToNextMonth()">&#10095;</button>
+      <button (click)="this.goToPreviousMonth()"><span class="icon">&#8249;</span></button>
+      <button (click)="this.goToNextMonth()"><span class="icon">&#8250;</span></button>
     </div>
   </div>
-  <div class="calendar-grid week-headers">
+  <div class="calendar-grid grid-headers">
   @for (header of headers; track header) {
     <div class="grid-cell">
       {{ header }}
     </div>
   }
   </div>
-  <div class="calendar-grid days">
+  <div class="calendar-grid grid-days">
   @for (day of days; track day.id) {
     @if (isDayDisabled(day.weekDay)) {
       <div
@@ -45,6 +45,7 @@
   }
   </div>
   <div class="workeddays-count">
-    Total worked days: {{ workDaysCount() }}
+    <div class="count-label">Total:</div>
+    <div class="count-total">{{ workDaysCount() }} days</div>
   </div>
 </div>
