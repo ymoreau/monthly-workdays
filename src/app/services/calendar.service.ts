@@ -63,6 +63,25 @@ export class CalendarService {
   }
 
   /**
+   * @returns the days of the week starting by firstDayOfTheWeek
+   */
+  public getOrderedWeekDays(): WeekDay[] {
+    const weekdays: WeekDay[] = [];
+
+    let i = this.firstDayOfTheWeek;
+    do {
+      weekdays.push(i);
+
+      i++;
+      if (i > WeekDay.SATURDAY) {
+        i = WeekDay.SUNDAY;
+      }
+    } while (i !== this.firstDayOfTheWeek)
+
+    return weekdays;
+  }
+
+  /**
    * Count the total work days based on Day.status of the given array
    * @returns Total of full days (counting half days as half a full day)
    */

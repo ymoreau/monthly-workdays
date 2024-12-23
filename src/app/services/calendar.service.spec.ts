@@ -70,6 +70,34 @@ describe('CalendarService', () => {
     expect(service.getDayPosition(days[6].weekDay)).toBe(7);
   });
 
+  it('should create a correct week of days starting on Sunday', () => {
+    service.firstDayOfTheWeek = WeekDay.SUNDAY;
+    const weekdays = service.getOrderedWeekDays();
+
+    expect(weekdays.length).toBe(7);
+    expect(weekdays[0]).toBe(WeekDay.SUNDAY);
+    expect(weekdays[1]).toBe(WeekDay.MONDAY);
+    expect(weekdays[2]).toBe(WeekDay.TUESDAY);
+    expect(weekdays[3]).toBe(WeekDay.WEDNESDAY);
+    expect(weekdays[4]).toBe(WeekDay.THURSDAY);
+    expect(weekdays[5]).toBe(WeekDay.FRIDAY);
+    expect(weekdays[6]).toBe(WeekDay.SATURDAY);
+  });
+
+  it('should create a correct week of days starting on Monday', () => {
+    service.firstDayOfTheWeek = WeekDay.MONDAY;
+    const weekdays = service.getOrderedWeekDays();
+
+    expect(weekdays.length).toBe(7);
+    expect(weekdays[0]).toBe(WeekDay.MONDAY);
+    expect(weekdays[1]).toBe(WeekDay.TUESDAY);
+    expect(weekdays[2]).toBe(WeekDay.WEDNESDAY);
+    expect(weekdays[3]).toBe(WeekDay.THURSDAY);
+    expect(weekdays[4]).toBe(WeekDay.FRIDAY);
+    expect(weekdays[5]).toBe(WeekDay.SATURDAY);
+    expect(weekdays[6]).toBe(WeekDay.SUNDAY);
+  });
+
   it('should count the total worked days', () => {
     const days: Day[] = [];
     for (let i = 1; i <= 10; i++) {
