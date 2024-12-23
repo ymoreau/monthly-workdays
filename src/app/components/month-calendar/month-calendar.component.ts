@@ -14,7 +14,8 @@ import { CalendarService } from '../../services/calendar.service';
 })
 export class MonthCalendarComponent {
   days: Day[] = [];
-  headers = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+  headers: string[];
+  headers_labels = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
   disabledDays = [WeekDay.SATURDAY, WeekDay.SUNDAY];
   currentMonthLabel = '';
 
@@ -23,6 +24,8 @@ export class MonthCalendarComponent {
   private readonly calendarService = inject(CalendarService);
 
   constructor() {
+    this.headers = this.calendarService.getOrderedWeekDays().map((weekday) => this.headers_labels[weekday as number]);
+
     this.days = this.calendarService.currentMonthDays();
     this.refreshMonthLabel();
   }
@@ -52,6 +55,6 @@ export class MonthCalendarComponent {
   private refreshMonthLabel(): void {
     this.days = this.calendarService.currentMonthDays();
     const date = this.calendarService.currentDate();
-    this.currentMonthLabel = date.toLocaleString('en-EN', { month: 'long' }) + ' ' + date.getFullYear();
+    this.currentMonthLabel = date.toLocaleString('en-GB', { month: 'long' }) + ' ' + date.getFullYear();
   }
 }
